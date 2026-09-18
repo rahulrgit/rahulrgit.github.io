@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Rathod — Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --bg-panel: #141B24;
+    --bg-panel-2: #1A2330;
+    --line: #263140;
+    --text: #E6EDF3;
+    --text-muted: #8B98A5;
+    --accent: #4FD1C5;
+    --accent-dim: #2E7D74;
+    --warn: #F0B429;
+    --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+  :root[data-theme="light"] {
+    --bg: #F5F7F9;
+    --bg-panel: #FFFFFF;
+    --bg-panel-2: #EEF2F5;
+    --line: #DCE3E8;
+    --text: #101820;
+    --text-muted: #56626C;
+    --accent: #158A7D;
+    --accent-dim: #0E6960;
+    --warn: #9A6A00;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F5F7F9;
+      --bg-panel: #FFFFFF;
+      --bg-panel-2: #EEF2F5;
+      --line: #DCE3E8;
+      --text: #101820;
+      --text-muted: #56626C;
+      --accent: #158A7D;
+      --accent-dim: #0E6960;
+      --warn: #9A6A00;
+      color-scheme: light;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: #06110F; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- top status bar ---- */
+  .statusbar {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-panel);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .statusbar-inner {
+    max-width: 920px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted);
+  }
+  .statusbar-left { display: flex; align-items: center; gap: 10px; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,209,197,0.15);
+  }
+  .statusbar nav { display: flex; gap: 20px; }
+  .statusbar nav a { text-decoration: none; color: var(--text-muted); transition: color .15s ease; }
+  .statusbar nav a:hover { color: var(--accent); }
+  .theme-toggle {
+    background: none; border: 1px solid var(--line); color: var(--text-muted);
+    font-family: var(--font-mono); font-size: 11px; padding: 4px 8px; border-radius: 4px; cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+  /* ---- hero ---- */
+  .hero { padding: 88px 0 64px; }
+  .hero-tag {
+    font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .hero-tag::before { content: "$ "; color: var(--text-muted); }
+  h1.hero-name {
+    font-size: clamp(38px, 6vw, 58px);
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .hero-role {
+    font-size: 19px; color: var(--text-muted); margin: 0 0 28px; max-width: 60ch;
+    font-weight: 400;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-family: var(--font-mono); font-size: 13.5px; color: var(--text-muted);
+    border-top: 1px solid var(--line); padding-top: 22px;
+  }
+  .hero-meta a { text-decoration: none; }
+  .hero-meta a:hover { color: var(--accent); }
+  .hero-meta span.k { color: var(--accent); }
+
+  /* uptime widget */
+  .uptime {
+    margin-top: 34px; display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+    background: var(--bg-panel); border: 1px solid var(--line); padding: 10px 16px; border-radius: 6px;
+  }
+  .uptime b { color: var(--text); font-size: 15px; font-weight: 600; }
+
+  /* ---- sections ---- */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  .section-head {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px;
+  }
+  .section-head .idx { font-family: var(--font-mono); color: var(--accent); font-size: 13px; }
+  h2 {
+    font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -0.01em;
+  }
+
+  /* summary */
+  .summary-text { font-size: 16.5px; color: var(--text-muted); max-width: 68ch; }
+  .summary-text strong { color: var(--text); font-weight: 500; }
+
+  /* experience timeline */
+  .job { display: grid; grid-template-columns: 160px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .job:last-child { border-bottom: none; }
+  .job-period { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); padding-top: 3px; }
+  .job-status { display: block; margin-top: 8px; font-size: 11px; color: var(--text-muted); }
+  .job-status.active { color: var(--accent); }
+  .job-title { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
+  .job-org { font-size: 14.5px; color: var(--text-muted); margin: 0 0 14px; }
+  .job ul { margin: 0; padding-left: 18px; color: var(--text-muted); font-size: 14.5px; }
+  .job li { margin-bottom: 7px; }
+  .job li::marker { color: var(--accent-dim); }
+  @media (max-width: 640px) {
+    .job { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* skills */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px;
+  }
+  .skill-panel {
+    background: var(--bg-panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px;
+  }
+  .skill-panel h3 {
+    font-family: var(--font-mono); font-size: 11.5px; text-transform: none;
+    color: var(--accent); margin: 0 0 10px; font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .skill-panel p { margin: 0; font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+  /* projects */
+  .projects { display: grid; gap: 14px; }
+  .proj {
+    background: var(--bg-panel); border: 1px solid var(--line); border-radius: 6px;
+    padding: 18px 20px; display: grid; grid-template-columns: 20px 1fr; gap: 14px;
+  }
+  .proj-dot { padding-top: 5px; }
+  .proj-dot i {
+    display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  }
+  .proj h3 { margin: 0 0 6px; font-size: 15.5px; font-weight: 600; }
+  .proj p { margin: 0; font-size: 13.8px; color: var(--text-muted); }
+
+  /* certs + education */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; gap: 36px; } }
+  .cert-list { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+  .cert-list li {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 9px 0; border-bottom: 1px dashed var(--line); color: var(--text-muted);
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-list .yr { font-family: var(--font-mono); font-size: 12px; color: var(--accent); white-space: nowrap; }
+
+  .edu-item { margin-bottom: 20px; }
+  .edu-item:last-child { margin-bottom: 0; }
+  .edu-item h4 { margin: 0 0 3px; font-size: 14.5px; font-weight: 600; }
+  .edu-item p { margin: 0; font-size: 13.5px; color: var(--text-muted); }
+  .edu-item .score { font-family: var(--font-mono); color: var(--accent); font-size: 12.5px; }
+
+  /* contact / footer */
+  .contact { text-align: left; }
+  .contact h2 { margin-bottom: 12px; }
+  .contact p.lead { color: var(--text-muted); max-width: 50ch; margin: 0 0 28px; font-size: 15.5px; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact-links a {
+    text-decoration: none; font-family: var(--font-mono); font-size: 13.5px;
+    border: 1px solid var(--line); padding: 10px 16px; border-radius: 6px; color: var(--text);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .contact-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 24px 0 40px;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 5px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="statusbar-inner">
+    <div class="statusbar-left">
+      <span class="dot"></span>
+      <span>rahul-rathod // status: available</span>
+    </div>
+    <nav>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">light/dark</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <p class="hero-tag">whoami</p>
+    <h1 class="hero-name">Rahul Rathod</h1>
+    <p class="hero-role">Systems Engineer specializing in Linux &amp; Windows administration, Docker containerization, AWS cloud operations, and network security — 4+ years keeping infrastructure online.</p>
+
+    <div class="hero-meta">
+      <a href="mailto:rahulrathod3578@gmail.com"><span class="k">mail</span> rahulrathod3578@gmail.com</a>
+      <a href="tel:+917558527311"><span class="k">tel</span> +91 7558527311</a>
+      <span><span class="k">loc</span> Kalyan, Mumbai, Maharashtra</span>
+      <a href="https://github.com/rahulrgit" target="_blank" rel="noopener"><span class="k">git</span> github.com/rahulrgit</a>
+      <a href="https://www.linkedin.com/in/rahulrathod-sysadmin" target="_blank" rel="noopener"><span class="k">in</span> linkedin.com/in/rahulrathod-sysadmin</a>
+    </div>
+
+    <div class="uptime">
+      <span>uptime:</span> <b>4+ years</b> <span>in production IT environments</span>
+    </div>
+  </section>
+
+  <section id="summary">
+    <div class="section-head"><span class="idx">01</span><h2>Summary</h2></div>
+    <p class="summary-text">
+      Dynamic Systems Engineer with over <strong>4 years of experience</strong> managing enterprise IT infrastructure, virtualization, and network security. Specialized in <strong>Linux &amp; Windows Administration</strong>, <strong>Containerization (Docker)</strong>, and <strong>Cloud Operations (AWS)</strong>. Proven track record of optimizing system performance, implementing automated deployment solutions, and maintaining high-availability environments — bridging hardware infrastructure with modern cloud-native technologies.
+    </p>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="idx">02</span><h2>Experience</h2></div>
+
+    <div class="job">
+      <div class="job-period">
+        Jul 2025 — Present
+        <span class="job-status active">● current role</span>
+      </div>
+      <div>
+        <p class="job-title">IT Executive</p>
+        <p class="job-org">International Springs And Stampings Pvt. Ltd. — Thane</p>
+        <ul>
+          <li>Managed and monitored IT infrastructure including servers, firewalls, routers, switches, Wi-Fi, and network systems to ensure high availability and minimum downtime.</li>
+          <li>Administered Linux and Windows environments — system upgrades, patch management, firmware updates, and backup operations.</li>
+          <li>Provided end-user technical support across hardware, software, email, network, printers, biometrics, and CCTV systems.</li>
+          <li>Managed LAN/WAN connectivity, IP addressing, endpoint security, and organizational security policies.</li>
+          <li>Maintained IT asset inventory and conducted regular audits across laptops, desktops, and networking devices.</li>
+          <li>Conducted cybersecurity awareness and phishing prevention training for employees.</li>
+          <li>Deployed open-source IT monitoring and asset management systems to improve visibility and incident tracking.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-period">Jun 2025 — Jul 2025</div>
+      <div>
+        <p class="job-title">Cyber Security Intern</p>
+        <p class="job-org">Prodigy InfoTech — Remote</p>
+        <ul>
+          <li>Developed cybersecurity-focused Python projects covering encryption, password security, image protection, and system monitoring.</li>
+          <li>Built a CLI-based Caesar Cipher application for text encryption/decryption with a customizable shift key.</li>
+          <li>Designed a Password Complexity Checker using Regex validation across length, symbols, digits, and patterns.</li>
+          <li>Created an image encryption/decryption tool using RGB pixel manipulation with NumPy and Pillow.</li>
+          <li>Built an ethical keylogger for cybersecurity awareness and education using Python keyboard event handling.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-period">Jul 2022 — Jul 2025</div>
+      <div>
+        <p class="job-title">System Administrator</p>
+        <p class="job-org">MKCL (Maharashtra Knowledge Corporation Limited) — Seawoods, Navi Mumbai</p>
+        <ul>
+          <li>Spearheaded management and development of IT infrastructure for scalability and efficiency.</li>
+          <li>Implemented asset management protocols, streamlining tracking and resource optimization.</li>
+          <li>Administered Linux environments, enhancing system performance and security.</li>
+          <li>Configured and managed Active Directory services, streamlining user access control.</li>
+          <li>Conducted vulnerability assessments and penetration testing using Qualys.</li>
+          <li>Managed DNS configuration on AWS (A, CNAME, TXT, MX records) and Route 53 for domain registration.</li>
+          <li>Utilized Docker to containerize applications for consistent, efficient deployments.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="idx">03</span><h2>Technical Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-panel">
+        <h3>infrastructure</h3>
+        <p>Linux Administration, Windows Server Administration, Virtualization, Hardware Operations</p>
+      </div>
+      <div class="skill-panel">
+        <h3>cloud &amp; containers</h3>
+        <p>AWS, DNS Management (Route 53), Docker, Containerization</p>
+      </div>
+      <div class="skill-panel">
+        <h3>networking</h3>
+        <p>Network Administration, Firewall Management, Active Directory, DNS</p>
+      </div>
+      <div class="skill-panel">
+        <h3>security</h3>
+        <p>Cybersecurity, Ethical Hacking, Vulnerability Assessment &amp; Penetration Testing</p>
+      </div>
+      <div class="skill-panel">
+        <h3>data</h3>
+        <p>Database Management</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head"><span class="idx">04</span><h2>Projects</h2></div>
+    <div class="projects">
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Self-Hosted Cloud OS</h3>
+          <p>Deployed CasaOS via Docker Compose for a self-hosted personal cloud storage and application management environment, configured for efficient resource usage and scalability.</p>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Web-Based File Browser</h3>
+          <p>Deployed a web-based file browser using Docker Compose for secure, centralized file access and management across the network, with a user-friendly interface.</p>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Passbolt Password Manager</h3>
+          <p>Deployed Passbolt, an open-source password manager, using Docker Compose and MySQL for secure, containerized team password storage and sharing.</p>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Centralized Asset Management Tool</h3>
+          <p>Deployed an open-source asset tracking tool on Nginx/Apache to streamline inventory management, reduce loss, and improve resource allocation.</p>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Web-Based OS Installer</h3>
+          <p>Deployed a Linux-based open-source OS installer to automate deployment across multiple machines simultaneously, reducing manual effort and rollout time.</p>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-dot"><i></i></div>
+        <div>
+          <h3>Network Monitoring Tool</h3>
+          <p>Implemented an open-source network monitoring solution for proactive issue detection, improving reliability and minimizing downtime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="learning">
+    <div class="section-head"><span class="idx">05</span><h2>Education &amp; Certifications</h2></div>
+    <div class="two-col">
+      <div>
+        <div class="edu-item">
+          <h4>B.Sc. — Computer System Administration</h4>
+          <p>MKCL Finishing School (MFS), Work-Based Learning Program — Seawoods</p>
+          <p>Degree from YCMOU, Nashik &nbsp;·&nbsp; Jul 2022 – Jul 2025</p>
+        </div>
+        <div class="edu-item">
+          <h4>HSC — Science</h4>
+          <p>Jaihind College, Chalisgaon, Jalgaon &nbsp;·&nbsp; 2022</p>
+          <p class="score">57.83%</p>
+        </div>
+        <div class="edu-item">
+          <h4>SSC</h4>
+          <p>Rashtriya Vidyalaya, Chalisgaon, Jalgaon &nbsp;·&nbsp; 2020</p>
+          <p class="score">74.60%</p>
+        </div>
+      </div>
+      <ul class="cert-list">
+        <li><span>Cyber Security Course — SkillFactory</span><span class="yr">2026</span></li>
+        <li><span>Ethical Hacker — Cisco</span><span class="yr">2025</span></li>
+        <li><span>Foundation of Cyber Security — Google</span><span class="yr">2024</span></li>
+        <li><span>Operating Systems Basics — Cisco</span><span class="yr">2024</span></li>
+        <li><span>Cisco Networking Basics — Cisco</span><span class="yr">2024</span></li>
+        <li><span>Career Essentials in System Administration — Microsoft &amp; LinkedIn</span><span class="yr">2024</span></li>
+        <li><span>Networking Devices &amp; Initial Configuration — Cisco</span><span class="yr">2024</span></li>
+        <li><span>SonicWall Firewall — Udemy</span><span class="yr">2024</span></li>
+        <li><span>Career Essentials in Cybersecurity — Microsoft &amp; LinkedIn</span><span class="yr">2024</span></li>
+        <li><span>Linux Tutorial — Great Learning</span><span class="yr">2024</span></li>
+        <li><span>AWS for Beginners — Great Learning</span><span class="yr">2024</span></li>
+        <li><span>Ethical Hacking — Mobile Platforms &amp; Network Architecture — Great Learning</span><span class="yr">2024</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-head"><span class="idx">06</span><h2>Contact</h2></div>
+    <p class="lead">Open to systems engineering, IT infrastructure, and cybersecurity roles. Reach out directly — usually replies within a day.</p>
+    <div class="contact-links">
+      <a href="mailto:rahulrathod3578@gmail.com">rahulrathod3578@gmail.com</a>
+      <a href="tel:+917558527311">+91 7558527311</a>
+      <a href="https://github.com/rahulrgit" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/rahulrathod-sysadmin" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Rahul Rathod — Kalyan, Mumbai</span>
+    <span id="clock"></span>
+  </footer>
+
+</div>
+
+<script>
+  // theme toggle
+  (function(){
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    btn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme');
+      if (current === 'dark') { root.setAttribute('data-theme', 'light'); }
+      else if (current === 'light') { root.setAttribute('data-theme', 'dark'); }
+      else {
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        root.setAttribute('data-theme', prefersLight ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // small footer clock, purely decorative, per-viewer only
+  (function(){
+    var el = document.getElementById('clock');
+    function tick(){
+      var d = new Date();
+      el.textContent = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+
+</body>
+</html>
