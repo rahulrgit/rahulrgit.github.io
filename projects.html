@@ -4,149 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Live Projects | Rahul Rathod</title>
+<meta name="description" content="Live, deployed tools by Rahul Rathod — Subnet Calculator, VLSM Planner, DNS Checker, Windows Event ID Lookup, Forensic Meta Tool.">
+<meta name="author" content="Rahul Rathod">
+<meta name="theme-color" content="#07111f">
+<link rel="canonical" href="https://rahulrgit.github.io/projects.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2307111f'/%3E%3Ctext x='32' y='46' font-family='monospace' font-size='40' font-weight='700' text-anchor='middle' fill='%2364b6ff'%3ER%3C/text%3E%3C/svg%3E">
+
+<script>
+(function(){try{var t=localStorage.getItem('rahul-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#07111f;
-    --bg-raised:#0d1a2b;
-    --line:#1c2c40;
-    --text:#dbe6f0;
-    --text-dim:#7d92a8;
-    --accent:#5eead4;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'JetBrains Mono','Courier New',monospace;
-    min-height:100vh;
-    padding:48px 20px 80px;
-  }
-  .wrap{max-width:760px;margin:0 auto;}
-  .back{
-    display:inline-block;
-    color:var(--text-dim);
-    text-decoration:none;
-    font-size:13px;
-    letter-spacing:.03em;
-    margin-bottom:40px;
-    border-bottom:1px solid transparent;
-  }
-  .back:hover{color:var(--accent);border-color:var(--accent);}
-  h1{
-    font-size:28px;
-    font-weight:600;
-    letter-spacing:-0.01em;
-    margin-bottom:10px;
-  }
-  .sub{
-    color:var(--text-dim);
-    font-size:14px;
-    line-height:1.6;
-    max-width:52ch;
-    margin-bottom:48px;
-  }
-  .list{
-    display:flex;
-    flex-direction:column;
-    border-top:1px solid var(--line);
-  }
-  .card{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:16px;
-    padding:22px 4px;
-    border-bottom:1px solid var(--line);
-    text-decoration:none;
-    color:inherit;
-    transition:background .15s ease;
-  }
-  .card:hover{background:var(--bg-raised);}
-  .card:hover .name{color:var(--accent);}
-  .meta{min-width:0;}
-  .name{
-    font-size:16px;
-    font-weight:600;
-    color:var(--text);
-    margin-bottom:4px;
-  }
-  .desc{
-    font-size:13px;
-    color:var(--text-dim);
-    line-height:1.5;
-  }
-  .open{
-    flex-shrink:0;
-    font-size:12px;
-    color:var(--accent);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:6px 12px;
-    white-space:nowrap;
-  }
-  footer{
-    margin-top:56px;
-    color:var(--text-dim);
-    font-size:11px;
-    letter-spacing:.05em;
-  }
-  @media (max-width:480px){
-    .card{flex-direction:column;align-items:flex-start;gap:10px;}
-    .open{align-self:flex-start;}
-  }
+:root{
+  --bg:#07111f;--panel:#0b192b;--panel2:#0e2137;--line:#1b3855;
+  --text:#e8f1fb;--muted:#8fa6bf;--cyan:#64b6ff;--amber:#ffb627;
+  --green:#5ee6a8;--shadow:0 18px 60px rgba(0,0,0,.24);
+}
+:root[data-theme="light"]{
+  --bg:#eef4fa;--panel:#fff;--panel2:#f6f9fc;--line:#d5e1ed;
+  --text:#10233b;--muted:#55708f;--cyan:#1767b1;--amber:#9b6800;
+  --green:#087a4d;--shadow:0 18px 50px rgba(36,72,110,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;
+  background-image:linear-gradient(rgba(100,182,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(100,182,255,.045) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1080px;margin:auto;padding:26px 22px 70px}
+.topbar{position:sticky;top:12px;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;margin-bottom:34px;background:var(--panel);background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.brand{font:600 12px "JetBrains Mono",monospace;color:var(--muted);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.actions{display:flex;gap:8px;flex-shrink:0}
+button,.btn{border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 12px;text-decoration:none;font:600 11px "JetBrains Mono",monospace;cursor:pointer}
+button:hover,.btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(100,182,255,.055),transparent 38%)}
+.section{margin:22px 0;scroll-margin-top:84px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.ref{font:600 11px "JetBrains Mono",monospace;color:var(--cyan);letter-spacing:.08em}
+h2{font-size:22px;margin:5px 0 0;letter-spacing:-.025em}
+.section-note{font:400 11px "JetBrains Mono",monospace;color:var(--muted)}
+.content{padding:28px}
+.summary{color:var(--muted);line-height:1.8;margin:0 0 22px;max-width:78ch}
+.link-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.link-card{display:block;padding:16px;border:1px solid var(--line);background:var(--panel2);text-decoration:none;overflow-wrap:anywhere}
+.link-card:hover{border-color:var(--cyan)}
+.link-card span{display:block;font:600 10px "JetBrains Mono",monospace;color:var(--amber);letter-spacing:.1em;margin-bottom:5px}
+.link-card b{font:600 14px Inter,sans-serif}
+.link-card p{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.65}
+footer{text-align:center;color:var(--muted);font:400 11px "JetBrains Mono",monospace;padding-top:28px;line-height:1.7}
+@media(max-width:560px){.wrap{padding:16px 14px 50px}.topbar{top:7px}.content{padding:22px}.link-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="https://rahulrgit.github.io/">&larr; BACK TO PORTFOLIO</a>
-    <h1>Live Projects</h1>
-    <p class="sub">Small tools I've built and deployed — networking utilities and one forensics helper. Each link opens the running app.</p>
+<div class="wrap">
 
-    <div class="list">
-
-      <a class="card" href="https://rahulrgit.github.io/subnet-calculator/" target="_blank" rel="noopener">
-        <div class="meta">
-          <div class="name">Subnet Calculator</div>
-          <div class="desc">Work out network/broadcast address, usable host range, and subnet mask from an IP and CIDR.</div>
-        </div>
-        <span class="open">OPEN</span>
-      </a>
-
-      <a class="card" href="https://rahulrgit.github.io/vlsm-planner/" target="_blank" rel="noopener">
-        <div class="meta">
-          <div class="name">VLSM Planner</div>
-          <div class="desc">Plan variable-length subnet masks across a network by host requirements per subnet.</div>
-        </div>
-        <span class="open">OPEN</span>
-      </a>
-
-      <a class="card" href="https://rahulrgit.github.io/dns-checker/" target="_blank" rel="noopener">
-        <div class="meta">
-          <div class="name">DNS Checker</div>
-          <div class="desc">Look up A, CNAME, MX, and TXT records for a domain.</div>
-        </div>
-        <span class="open">OPEN</span>
-      </a>
-
-      <a class="card" href="https://rahulrgit.github.io/windows-event-id-lookup/" target="_blank" rel="noopener">
-        <div class="meta">
-          <div class="name">Windows Event ID Lookup</div>
-          <div class="desc">Search Windows Event Log IDs to find what a given event actually means.</div>
-        </div>
-        <span class="open">OPEN</span>
-      </a>
-
-      <a class="card" href="https://rahulrgit.github.io/forensic-meta-tool/" target="_blank" rel="noopener">
-        <div class="meta">
-          <div class="name">Forensic Meta Tool</div>
-          <div class="desc">Inspect file metadata for basic digital-forensics triage.</div>
-        </div>
-        <span class="open">OPEN</span>
-      </a>
-
-    </div>
-
-    <footer>RAHUL RATHOD &middot; KALYAN, MUMBAI</footer>
+<header class="topbar">
+  <div class="brand">RAHUL-RATHOD // LIVE PROJECTS // REV.2026</div>
+  <div class="actions">
+    <a class="btn" href="https://rahulrgit.github.io/">← PORTFOLIO</a>
+    <button id="theme" type="button" aria-label="Light theme" aria-pressed="false">LIGHT/DARK</button>
   </div>
+</header>
+
+<main id="main">
+<section class="section" id="live-projects">
+  <div class="section-head"><div><div class="ref">MODULE 07 — LIVE PROJECTS</div><h2>Live Projects</h2></div><span class="section-note">DEPLOYED / RUNNING</span></div>
+  <div class="card content">
+    <p class="summary">Small tools I've built and deployed — networking utilities and one forensics helper. Each link opens the running app.</p>
+    <div class="link-grid">
+      <a class="link-card" href="https://rahulrgit.github.io/subnet-calculator/" target="_blank" rel="noopener">
+        <span>OPEN ↗</span><b>Subnet Calculator</b>
+        <p>Work out network/broadcast address, usable host range, and subnet mask from an IP and CIDR.</p>
+      </a>
+      <a class="link-card" href="https://rahulrgit.github.io/vlsm-planner/" target="_blank" rel="noopener">
+        <span>OPEN ↗</span><b>VLSM Planner</b>
+        <p>Plan variable-length subnet masks across a network by host requirements per subnet.</p>
+      </a>
+      <a class="link-card" href="https://rahulrgit.github.io/dns-checker/" target="_blank" rel="noopener">
+        <span>OPEN ↗</span><b>DNS Checker</b>
+        <p>Look up A, CNAME, MX, and TXT records for a domain.</p>
+      </a>
+      <a class="link-card" href="https://rahulrgit.github.io/windows-event-id-lookup/" target="_blank" rel="noopener">
+        <span>OPEN ↗</span><b>Windows Event ID Lookup</b>
+        <p>Search Windows Event Log IDs to find what a given event actually means.</p>
+      </a>
+      <a class="link-card" href="https://rahulrgit.github.io/forensic-meta-tool/" target="_blank" rel="noopener">
+        <span>OPEN ↗</span><b>Forensic Meta Tool</b>
+        <p>Inspect file metadata for basic digital-forensics triage.</p>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>REV.2026 · RAHUL RATHOD · KALYAN, MUMBAI</footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('theme');
+  function isLight(){return root.getAttribute('data-theme')==='light'}
+  function sync(){btn.setAttribute('aria-pressed',String(isLight()))}
+  sync();
+  btn.addEventListener('click',function(){
+    var next=isLight()?'dark':'light';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('rahul-theme',next)}catch(e){}
+    sync();
+  });
+})();
+</script>
 </body>
 </html>
